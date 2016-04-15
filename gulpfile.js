@@ -1,5 +1,9 @@
 // Include gulp
 var gulp = require('gulp');
+var webserver = require('gulp-webserver');
+var browserSync = require('browser-sync').create();
+
+
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
@@ -14,6 +18,28 @@ var sassOptions = {
 };
 
 
+ 
+// gulp.task('webserver', function() {
+//   gulp.src('public')
+//     .pipe(webserver({
+//         open:true,
+//         livereload: true,
+//         directoryListing: {
+//             enable: true,
+//             path: 'css'
+//         }
+//     }));
+// });
+
+gulp.task('browserSync', function() {
+  browserSync.init({
+    server: {
+      baseDir: 'public'
+    },
+  })
+})
+
+
 gulp.task('sass', function () {
     return gulp
         .src('assets/scss/app.scss')
@@ -21,7 +47,10 @@ gulp.task('sass', function () {
         .pipe(sass(sassOptions).on('error', sass.logError))
         .pipe(autoprefixer())
         .pipe(sourcemaps.write('maps'))
-        .pipe(gulp.dest('public/css'));
+        .pipe(gulp.dest('public/css'))
+        .pipe(browserSync.reload({
+          stream: true
+        }))
 });
 
 
@@ -36,9 +65,9 @@ gulp.task('scripts', function() {
 });
 
 // Watch Files For Changes
-gulp.task('watch', function() {
-    gulp.watch('assets/js/*.js', ['scripts']);
+gulp.task('watch', ['browserSync', 'sass'], function() {
     gulp.watch('assets/scss/*.scss', ['sass']);
+    // gulp.watch('assets/js/*.js', ['scripts']);
 });
 
 // Default Task

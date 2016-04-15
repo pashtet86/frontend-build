@@ -41,6 +41,9 @@ table {
 
 body {
   background: #000;
+  font-size: 3rem;
+  min-height: 1000rem;
+  color: #fff;
 }
 
 .main {
@@ -62,10 +65,7 @@ body {
   z-index: 100;
   display: block;
   border-radius: 10px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: block;
 }
 
 /*# sourceMappingURL=maps/app.css.map */
