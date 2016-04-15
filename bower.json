@@ -1,0 +1,21 @@
+{
+  "name": "test-project",
+  "description": "testing",
+  "main": "ssets",
+  "authors": [
+    "pashtet"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "reset.scss": "^1.0.1"
+  }
+}

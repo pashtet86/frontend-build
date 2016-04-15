@@ -1,0 +1,28 @@
+@import "bower_components/reset.scss/reset.scss";
+
+body {
+	display: none;
+}
+
+.main {
+	width: 100vw;
+	height: 100vh;
+	background-position:center center;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	position: relative;
+	overflow: hidden;
+}
+
+.main__circle {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	height: 125vh;
+	width: 125vh;
+	z-index: 100;
+    display:block;
+    border-radius: 10px; 
+    display: flex;    
+}
+ 
