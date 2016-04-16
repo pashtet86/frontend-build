@@ -1,18 +1,18 @@
 // Include gulp
-var gulp = require('gulp');
-var webserver = require('gulp-webserver');
-var browserSync = require('browser-sync').create();
-var cssnano = require('gulp-cssnano');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var autoprefixer = require('gulp-autoprefixer');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
+var gulp            = require('gulp');
+var sass            = require('gulp-sass');
+var browserSync     = require('browser-sync').create();
+var cssnano         = require('gulp-cssnano');
+var sourcemaps      = require('gulp-sourcemaps');
+var autoprefixer    = require('gulp-autoprefixer');
+var concat          = require('gulp-concat');
+var uglify          = require('gulp-uglify');
+var rename          = require('gulp-rename');
 
 var sassOptions = {
+  // includePaths: require('node-bourbon').includePaths
   errLogToConsole: true,
-  outputStyle: 'expanded'
+  outputStyle: 'expanded',
 };
 
 gulp.task('browserSync', function() {
