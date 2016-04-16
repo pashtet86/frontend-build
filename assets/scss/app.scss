@@ -1,10 +1,11 @@
+@import "bower_components/bourbon/app/assets/stylesheets/_bourbon.scss";
 @import "bower_components/reset.scss/reset.scss";
 
 body {
 	background: #000;
 	font-size: 3rem;   
 	min-height: 1000rem;
-	color: #fff;
+	color: red;
 }
 
 .main {
@@ -15,6 +16,7 @@ body {
 	background-size: 100% auto;
 	position: relative;
 	overflow: hidden; 
+	@include transform(scale(0));  
 }
 
 .main__circle {
@@ -26,6 +28,6 @@ body {
 	z-index: 100;
     display:block;
     border-radius: 10px; 
-    display: block;     
+    display: block;      
 }
  

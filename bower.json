@@ -16,6 +16,7 @@
     "tests"
   ],
   "devDependencies": {
-    "reset.scss": "^1.0.1"
+    "reset.scss": "^1.0.1",
+    "bourbon": "^4.2.7"
   }
 }
