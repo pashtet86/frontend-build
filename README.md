@@ -1,7 +1,9 @@
 # frontend-build
 
-My own build 
+My own build with browsersync plugin
 
-## Styles
-- autoprefixer
-- minifying
+## features
+- sourcemaps
+- autoprefixer for css
+- styles minifying
+- images minifying
