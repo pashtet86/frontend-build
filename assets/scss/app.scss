@@ -1,13 +1,12 @@
 @import "bower_components/bourbon/app/assets/stylesheets/_bourbon.scss";
 @import "bower_components/reset.scss/reset.scss";
-
 @import "helpers/index.scss";
 
 body {
 	background: #000;
 	font-size: 3rem;   
 	min-height: 1000rem;
-	color: #fff; 
+	color: #fff;  
 }
 
 .main {

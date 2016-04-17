@@ -33,8 +33,8 @@ gulp.task('styles', function () {
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(autoprefixer())
     // .pipe(cssnano()) //brake sourcemapse 
-    .pipe(sourcemaps.write('maps'))
     .pipe(rename('main.css'))
+    .pipe(sourcemaps.write('maps'))
     .pipe(gulp.dest('public/css'))
     .pipe(browserSync.reload({
       stream: true
