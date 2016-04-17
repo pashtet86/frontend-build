@@ -2,7 +2,7 @@
 
 My own build with browsersync plugin
 
-## features
+## gulp features for styles, images, fonts
 - sourcemaps
 - autoprefixer for css
 - styles minifying
