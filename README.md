@@ -7,3 +7,7 @@ My own build with browsersync plugin
 - autoprefixer for css
 - styles minifying
 - images minifying
+
+## bower
+- reset styles
+- bourbon
