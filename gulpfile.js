@@ -2,6 +2,7 @@
 var gulp            = require('gulp'),
     sass            = require('gulp-sass'),
     browserSync     = require('browser-sync').create(),
+    htmlInjector    = require("bs-html-injector"),
     cssnano         = require('gulp-cssnano'),
     sourcemaps      = require('gulp-sourcemaps'),
     autoprefixer    = require('gulp-autoprefixer'),
@@ -9,7 +10,8 @@ var gulp            = require('gulp'),
     uglify          = require('gulp-uglify'),
     rename          = require('gulp-rename'),
     imagemin        = require('gulp-imagemin'),
-    cache           = require('gulp-cache');
+    cache           = require('gulp-cache'),
+    reload          = browserSync.reload;
 
 var sassOptions = {
   errLogToConsole: true,
@@ -18,7 +20,11 @@ var sassOptions = {
 
 // browserSync
 gulp.task('browserSync', function() {
+  browserSync.use(htmlInjector, {
+    files: "public/*.html"
+  });
   browserSync.init({
+    host  : '192.168.0.13',
     server: {
       baseDir: 'public'
     },
@@ -36,9 +42,7 @@ gulp.task('styles', function () {
     .pipe(rename('main.css'))
     .pipe(sourcemaps.write('maps'))
     .pipe(gulp.dest('public/css'))
-    .pipe(browserSync.reload({
-      stream: true
-    }))
+    .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
 // Images optimization
@@ -62,9 +66,10 @@ gulp.task('images', function(){
 // });
 
 // Watch Files For Changes
-gulp.task('watch', ['browserSync', 'styles', 'images'], function() {
+gulp.task('watch', ['browserSync','styles'], function() {
   gulp.watch('assets/scss/**/*.scss', ['styles']);
   gulp.watch('assets/imgs/**/*.+(png|jpg|gif|svg)', ['images']);
+  gulp.watch("public/*.html", htmlInjector);
   // gulp.watch('assets/js/*.js', ['scripts']);
 });
 

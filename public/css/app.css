@@ -44,7 +44,7 @@ body {
 }
 
 body {
-  background: red;
+  background: #000;
   font-size: 3rem;
   min-height: 1000rem;
   color: #fff;
@@ -78,5 +78,3 @@ p {
   border-radius: 10px;
   display: block;
 }
-
-/*# sourceMappingURL=maps/main.css.map */
