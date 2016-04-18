@@ -39,13 +39,56 @@ table {
   border-spacing: 0;
 }
 
-body {
-  background: #fff;
+html {
+  font: 16px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*===============================
+=            Headers            =
+===============================*/
+h1 {
+  font-size: 36px;
+  line-height: 44px;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 44px;
+}
+
+h3 {
+  font-size: 21px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+/*=====  End of Headers  ======*/
+.special {
+  font-style: italic;
+}
+
+.firm {
+  font-variant: small-caps;
+}
+
+/*
+  ========================================
+  Links
+  ========================================
+*/
+a:hover {
+  color: #a9b2b9;
+}
+
+a {
+  color: #648880;
 }
 
 body {
   background: red;
-  font-size: 3rem;
+  font-size: 2rem;
   min-height: 1000rem;
   color: #fff;
   padding: 2rem;

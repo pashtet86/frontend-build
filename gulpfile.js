@@ -11,7 +11,8 @@ var gulp            = require('gulp'),
     rename          = require('gulp-rename'),
     imagemin        = require('gulp-imagemin'),
     cache           = require('gulp-cache'),
-    reload          = browserSync.reload;
+    reload          = browserSync.reload,
+    globbing        = require('gulp-css-globbing'); //globing scss files from folders
 
 var sassOptions = {
   errLogToConsole: true,
@@ -24,7 +25,7 @@ gulp.task('browserSync', function() {
     files: "public/*.html"
   });
   browserSync.init({
-    host  : '192.168.0.13',
+    host  : '192.168.0.13', //set it mannually if you user virtualbox
     server: {
       baseDir: 'public'
     },
@@ -35,10 +36,13 @@ gulp.task('browserSync', function() {
 gulp.task('styles', function () {
   return gulp
     .src('assets/scss/app.scss')
+    .pipe(globbing({
+        extensions: ['.scss']
+    }))
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(autoprefixer())
-    // .pipe(cssnano()) //brake sourcemapse 
+    // .pipe(cssnano()) //brake sourcemaps
     .pipe(rename('main.css'))
     .pipe(sourcemaps.write('maps'))
     .pipe(gulp.dest('public/css'))
