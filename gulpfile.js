@@ -12,7 +12,9 @@ var gulp            = require('gulp'),
     imagemin        = require('gulp-imagemin'),
     cache           = require('gulp-cache'),
     reload          = browserSync.reload,
-    globbing        = require('gulp-css-globbing'); //globing scss files from folders
+    globbing        = require('gulp-css-globbing'), //globing scss files from folders
+    notify 			    = require("gulp-notify"),
+    size 			      = require('gulp-size');
 
 var sassOptions = {
   errLogToConsole: true,
@@ -25,7 +27,7 @@ gulp.task('browserSync', function() {
     files: "public/*.html"
   });
   browserSync.init({
-    host  : '192.168.0.13', //set it mannually if you user virtualbox
+    host  : '192.168.0.13', //set it mannually if you use virtualbox
     server: {
       baseDir: 'public'
     },
@@ -42,20 +44,21 @@ gulp.task('styles', function () {
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(autoprefixer())
-    // .pipe(cssnano()) //brake sourcemaps
+    // .pipe(cssnano()) // sourcemaps can brokes
     .pipe(rename('main.css'))
     .pipe(sourcemaps.write('maps'))
+    .pipe(size())
     .pipe(gulp.dest('public/css'))
-    .pipe(browserSync.stream({match: '**/*.css'}));
+    .pipe(browserSync.stream({match: '**/*.css'}))
+    .pipe(notify({title: 'Gulp', message: 'CSS compiled successfully'}))
 });
 
 // Images optimization
 gulp.task('images', function(){
   return gulp
     .src('assets/imgs/**/*.+(png|jpg|gif|svg)')
-    .pipe(cache(imagemin({
-      interlaced: true
-    })))
+    .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
+    .pipe(size())
     .pipe(gulp.dest('public/imgs'))
 });
 
@@ -78,4 +81,4 @@ gulp.task('watch', ['browserSync','styles'], function() {
 });
 
 // Default Task
-gulp.task('default', ['browserSync', 'styles', 'images', 'watch']);
+gulp.task('default', ['styles', 'images']);
