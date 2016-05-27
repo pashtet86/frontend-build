@@ -1,9 +1,13 @@
 body {
 	background: $main-color;
 	font-size: 2rem;
-	min-height: 1000rem;
+	min-height: 100rem;
 	color: #fff;
 	padding: 2rem;
+	@include background(linear-gradient(red, green) left repeat);
 }
 .content {
+	font-family: $georgia;
+	@include margin(null 10px 3em 20vh); 
+	display: block;
 }

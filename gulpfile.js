@@ -1,6 +1,9 @@
 // Includes
 var gulp            = require('gulp'),
     sass            = require('gulp-sass'),
+    source          = require('vinyl-source-stream'),
+    gutil           = require('gulp-util'),
+    browserify      = require('browserify'),
     browserSync     = require('browser-sync').create(),
     htmlInjector    = require("bs-html-injector"),
     cssnano         = require('gulp-cssnano'),
@@ -11,10 +14,11 @@ var gulp            = require('gulp'),
     rename          = require('gulp-rename'),
     imagemin        = require('gulp-imagemin'),
     cache           = require('gulp-cache'),
-    reload          = browserSync.reload,
+    // reload          = browserSync.reload,
     globbing        = require('gulp-css-globbing'), //globing scss files from folders
     notify 			    = require("gulp-notify"),
-    size 			      = require('gulp-size');
+    size 			      = require('gulp-size'),
+    nunjucksRender  = require('gulp-nunjucks-render');
 
 var sassOptions = {
   errLogToConsole: true,
@@ -42,7 +46,8 @@ gulp.task('styles', function () {
         extensions: ['.scss']
     }))
     .pipe(sourcemaps.init())
-    .pipe(sass(sassOptions).on('error', sass.logError))
+    .pipe(sass(sassOptions)
+    .on("error", notify.onError(function (error) { return "CSS not builded: " + error.message; }))) //if not builded show error message
     .pipe(autoprefixer())
     // .pipe(cssnano()) // sourcemaps can brokes
     .pipe(rename('main.css'))
@@ -50,7 +55,6 @@ gulp.task('styles', function () {
     .pipe(size())
     .pipe(gulp.dest('public/css'))
     .pipe(browserSync.stream({match: '**/*.css'}))
-    .pipe(notify({title: 'Gulp', message: 'CSS compiled successfully'}))
 });
 
 // Images optimization
@@ -62,21 +66,20 @@ gulp.task('images', function(){
     .pipe(gulp.dest('public/imgs'))
 });
 
-// Concatenate & Minify JS
-// gulp.task('scripts', function() {
-//   return gulp.src('assets/js/*.js')
-//     .pipe(concat('all.js'))
-//     .pipe(gulp.dest('public'))
-//     .pipe(rename('all.min.js'))
-//     .pipe(uglify())
-//     .pipe(gulp.dest('public/js'));
-// });
+gulp.task('nunjucks', function() {
+  return gulp.src('assets/pages/**/*.+(html|nunjucks)')
+  .pipe(nunjucksRender({
+      path: ['assets/templates']
+    }))
+  .pipe(gulp.dest('public'))
+});
 
 // Watch Files For Changes
-gulp.task('watch', ['browserSync','styles'], function() {
+gulp.task('watch', ['nunjucks','browserSync','styles'], function() {
   gulp.watch('assets/scss/**/*.scss', ['styles']);
   gulp.watch('assets/imgs/**/*.+(png|jpg|gif|svg)', ['images']);
-  gulp.watch("public/*.html", htmlInjector);
+  gulp.watch("assets/**/*.html", ['nunjucks']);
+  // gulp.watch("public/*.html", htmlInjector);
   // gulp.watch('assets/js/*.js', ['scripts']);
 });
 

@@ -7,19 +7,13 @@
 </head>
 <body>
 	<div class="header">
-		<a href="#">Home</a>
-<a href="#">About</a>
-<a href="#">Contact</a>
-
+		{% include "partials/nav.html" %}
 	</div>
 	<div class="content">
-		<h1>Content 1 </h1>
+		{% include "partials/content.html" %}
 	</div>
 	<div class="footger">
-		<a href="#">Home</a>
-<a href="#">About</a>
-<a href="#">Contact</a>
-
+		{% include "partials/footer.html" %}
 	</div>
 </body>
 </html>

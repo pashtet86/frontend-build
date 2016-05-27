@@ -94,9 +94,19 @@ a {
 body {
   background: red;
   font-size: 2rem;
-  min-height: 1000rem;
+  min-height: 100rem;
   color: #fff;
   padding: 2rem;
+  background: -webkit-linear-gradient(red, green);
+  background: linear-gradient(red, green);
+}
+
+.content {
+  font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif;
+  margin-right: 10px;
+  margin-bottom: 3em;
+  margin-left: 20vh;
+  display: block;
 }
 
 /* No files to import found in modules//* */
